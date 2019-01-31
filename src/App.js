@@ -1,4 +1,5 @@
 import React from 'react';
+import {Button} from 'antd-mobile';
 
 class App extends React.Component{
   render(){
@@ -23,7 +24,7 @@ class PaoBingLian extends React.Component{
     const {soliders} = this.state;
     return(<div>
       <h2>官职：{this.props.capture}</h2>
-      <button onClick={this.joinTheArmy}>报告，有人参军</button>
+      <Button type='primary' onClick={this.joinTheArmy}>报告，有人参军</Button>
       <ul>
         {
           soliders.map((value, idx) => {

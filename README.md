@@ -75,3 +75,15 @@
       }
     });
   ```
+
+## 组件库使用 antd-mobile
+  - 按需加载第一步：安装 `babel-plugin-import`；
+  - 按需加载第二步：在 package.json 中进行配置：
+  ```
+    "babel": {
+      "plugins": [
+        ["import", { "libraryName": "antd-mobile", "style": "css" }]
+      ]
+    }
+  ```
+  * 注：json 文件中的所有单引号要改为双引号。

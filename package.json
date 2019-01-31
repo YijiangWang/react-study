@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/core": "7.1.6",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.3.1",
     "@svgr/webpack": "2.4.1",
+    "antd-mobile": "^2.2.8",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",
@@ -114,6 +116,17 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      [
+        "import", { 
+          "libraryName": "antd-mobile", 
+          "style": "css" 
+        }
+      ]
     ]
+  },
+  "devDependencies": {
+    "babel-plugin-import": "^1.11.0"
   }
 }
