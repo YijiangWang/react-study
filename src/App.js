@@ -1,38 +1,15 @@
 import React from 'react';
-import {Button} from 'antd-mobile';
+import {join, leave} from './index.redux';
 
 class App extends React.Component{
   render(){
-    return(<div>
-      <h2>大家好，我是军区司令。。。</h2>
-      <PaoBingLian capture={'我是师长。。。'}/>
+    const {store} = this.props;
+    return (<div>
+      <h2>欢迎来到学校报名<br/>已报名{store.getState()}</h2>
+      <button onClick={()=>store.dispatch(join())}>新生报到</button>
+      <button onClick={()=>store.dispatch(leave())}>办理退学</button>
     </div>);
   }
 }
 
-class PaoBingLian extends React.Component{
-  constructor(){
-    super();
-    this.state = {soliders: ['小兵张嘎', '拴住', '铁蛋']};
-  }
-  joinTheArmy = () => {
-    this.setState({
-      soliders: [...this.state.soliders, '新兵蛋子' + Math.random()]
-    });
-  }
-  render(){
-    const {soliders} = this.state;
-    return(<div>
-      <h2>官职：{this.props.capture}</h2>
-      <Button type='primary' onClick={this.joinTheArmy}>报告，有人参军</Button>
-      <ul>
-        {
-          soliders.map((value, idx) => {
-            return (<li key={idx}>{value}</li>);
-          })
-        }
-      </ul>
-    </div>);
-  }
-}
 export default App;
