@@ -87,3 +87,27 @@
     }
   ```
   * 注：json 文件中的所有单引号要改为双引号。
+
+  ## Redux 处理异步，这里使用 redux-thunk 插件
+    - npm install redux-thunk --save；
+    - 使用 applyMiddleware 开启 thunk 中间件；
+    - action 可以返回函数，使用 dispatch 提交 action。
+    ```js
+      export const join = () => {
+        return {type: JOINCLASS};
+      };
+      export const leave = () => {
+        return {type: LEAVECLASS};
+      };
+      //异步事件
+      export const joinAsync = () => {
+        return dispatch => {
+          setTimeout(() => {
+            //dispatch({type: JOINCLASS})
+            dispatch(join());
+          },2000);
+        };
+      };
+    ```
+  ## 调试工具使用：npm install redux-devtools-extension，并且需要开启
+  ## 使用 react-redux 更加优雅的链接 react 和 redux

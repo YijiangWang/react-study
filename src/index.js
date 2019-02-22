@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import App from './app';
-import {reducer, join, leave} from './index.redux';
+import {reducer, join, leave, joinAsync} from './index.redux';
 
-const store = createStore(reducer);
+const store = createStore(
+  reducer, 
+  applyMiddleware(thunk)
+);
 
 const render = () => {
-  ReactDOM.render(<App store={store} join={join} leave={leave}/>, document.getElementById('root'));
+  ReactDOM.render(<App store={store} join={join} leave={leave} joinAsync={joinAsync}/>, document.getElementById('root'));
 };
 render();
 store.subscribe(render);

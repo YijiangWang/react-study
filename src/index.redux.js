@@ -18,3 +18,11 @@ export const join = () => {
 export const leave = () => {
   return {type: LEAVECLASS};
 };
+// 异步 action
+export const joinAsync = () => {
+  return dispatch => {
+    setTimeout(()=>{
+      dispatch(join());
+    }, 2000);
+  };
+};
