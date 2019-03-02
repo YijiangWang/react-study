@@ -2,7 +2,7 @@
  * 1、二进制和八进制：
  *  1.1. 二进制前缀为 0b 或者 0B
  *  1.2. 八进制前缀为 0o 或者 0O
- *  1.3. 将二进制、十进制转化为十进制：Number('0b111')
+ *  1.3. 将二进制、八进制转化为十进制：Number('0b111')
  */
 
  //严格模式
@@ -79,11 +79,109 @@
 // console.log(0.1 + 0.2 - 0.3 < Number.EPSILON * Math.pow(2,2));
 // console.log(2e-2);
 
-let stringA = 'I ' + 'am ' + 'a ' + 'boy.';
-console.log(stringA);
+// let stringA = 'I ' + 'am ' + 'a ' + 'boy.';
+// console.log(stringA);
 
-let stringB = `You are a girl.${stringA}`;
-console.log(stringB); 
+// let stringB = `You are a girl.${stringA}`;
+// console.log(stringB); 
 
-const arrA = [1, 4, 2, 10, 21, 32, 311];
-console.log(arrA.sort('b' - 'a'));
+// const arrA = [1, 4, 2, 10, 21, 32, 311];
+
+
+/**
+ * 6. 安全整数和 Number.isSafeInteger()
+ * 6.1. JavaScript 能够准确表示的整数范围在 -2^53 到 2^53 之间（不含两个端点），超过这个范围，无法精确表示，并且以边界值进行存储；
+ * 6.2. Number.MAX_SAFE_INTEGER) 和 Number.MIN_SAFE_INTEGER 用来表示范围的上下限；
+ * 6.3. Number.isSafeInteger() 用来判断一个整数是否在这个范围之内（包括边界）；
+ * 6.4. 注意：验证运算结果是否落在安全整数的范围内时，不止要验证运算结果，还要验证参与运算的每一个值；
+ */
+
+// console.log(Math.pow(2, 53) === Math.pow(2, 53) + 1); //true
+// console.log(Math.pow(2, 53));
+// console.log(Math.pow(2, 53) + 1);
+// console.log(Number.MAX_SAFE_INTEGER === Math.pow(2, 53) - 1); //true
+// console.log(Number.MIN_SAFE_INTEGER === -Math.pow(2, 53) + 1);  //true
+
+// console.log(Number.isSafeInteger(3.2));
+// console.log(Number.isSafeInteger(Number.MAX_SAFE_INTEGER + 1));
+
+/**
+ * 7. Math 对象的扩展：ES6 在 Math 对象上新增了 17 个数学相关的静态方法，只能 Math 对象调用
+ * 7.1. Math.trunc()：除去一个数的小数部分，返回整数部分；对于非数值，会先将其使用 Number 方法转为数值；对于空值和无法截取整数的值返回 NaN（Math.trunc(null) 为 0）；
+ * 
+ */
+
+// console.log(Math.trunc(3.9));
+// console.log(Math.trunc(-4.9));
+// console.log(Math.trunc('23.88'));
+// console.log(Math.trunc(undefined));
+// //实现
+// const truncFun = (x) => {
+//   return x<0 ? Math.ceil(x) : Math.floor(x);
+// }
+// console.log(Math.ceil('a'));
+
+/**
+ * 7.2. Math.sign()：判断一个数是整数、负数还是 0，对于非数值，先将其转换为数值。
+ * 7.2.1. 返回的值有：+1/-1/+0/-0/NaN
+ */
+// console.log(Math.sign('')); //0
+// console.log(Math.sign(null));
+// console.log(Math.sign('-0'));
+// console.log(Math.sign('-11'));
+// console.log(typeof(+'-11'));
+// 实现
+// const signFun = (x) => {
+//   x = +x;
+//   if(x === 0 || isNaN(x)){
+//     return x;
+//   }
+//   return x > 0 ? 1 : -1;
+// };
+// console.log(signFun(8.8))
+
+/**
+ * 7.3. Math.cbrt()：计算一个数的立方根，对于非数值，方法内部会先使用 Number 方法将其转换为数值（(Math.cbrt(null)：0）
+ */
+// console.log(Math.cbrt(null));
+// // 实现
+// const cbrtFun = (x) => {
+//   return Math.pow(Math.abs(x), 1/3)
+// }
+// console.log(cbrtFun(-8));
+
+function* gen(){
+  yield 'heiheihei';
+  yield 'haha';
+  return 'end来了';
+  yield '还有吗';
+}
+
+const [a, b, c, d] = gen()
+console.log(a, b, c, d);  //heiheihei haha undefined undefined
+// const g = gen();
+// console.log(g);
+// console.log(g.next());
+// console.log(g.next());
+// console.log(g.next());
+// console.log(g.next());
+
+function* testFunc(){
+  let a = 0;
+  let b = 1;
+  while(true){
+    yield a;
+    [a, b] = [b, a + b];
+  } 
+}
+
+// const test = testFunc();
+// console.log(test.next());
+// console.log(test.next());
+// console.log(test.next());
+// console.log(test.next());
+// console.log(test.next());
+// console.log(test.next());
+
+const items = new Set([1,2,3,4,5,6,4,3,2]);
+console.log(items)
