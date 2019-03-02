@@ -1,15 +1,23 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {join, leave, joinAsync} from './index.redux';
 
-class App extends React.Component{
+let App = class App extends React.Component{
   render(){
-    const {store, join, leave, joinAsync} = this.props;
+    const {num, join, leave, joinAsync} = this.props;
     return (<div>
-      <h2>欢迎来到学校报名<br/>已报名{store.getState()}</h2>
-      <button onClick={()=>store.dispatch(join())}>新生报到</button>
-      <button onClick={()=>store.dispatch(leave())}>办理退学</button>
-      <button onClick={()=>store.dispatch(joinAsync())}>我过两天退学</button>
+      <h2>欢迎来到学校报名,已报名：{num}</h2>
+      <button onClick={join}>新生报到</button>
+      <button onClick={leave}>办理退学</button>
+      <button onClick={joinAsync}>我过两天报到</button>
     </div>);
   }
-}
+};
+
+const mapStateToProps = state => {
+  return {num: state};
+};
+const actionCreators = {join, leave, joinAsync};
+App = connect(mapStateToProps, actionCreators)(App);
   
 export default App;  

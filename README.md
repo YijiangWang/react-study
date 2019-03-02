@@ -122,3 +122,62 @@
     );
   ```
 ## 使用 react-redux 更加优雅的链接 react 和 redux
+  - 首先进行安装：`npm install react-redux --save`；
+  - 以后不必再使用 subscribe，只需使用 reducer、action 和 dispatch 即可；
+  - react-redux 中提供了 Provider 和 connect 两个接口。
+    - Provider 组件在应该最外层，传入 store 即可，不需传入多次；如果不使用 Provider，A 组件中需要使用 store，A 组件中的子组件 B 也需要使用 store，B 组件中的子组件 C 也需要使用 store，这样就需要将 store 一层一层往下传；
+    - connect 负责从外部获取组件所需要的参数；
+    ```js
+      const mapStateToProps = state => {
+        return {num: state};
+      };
+      const actionCreators = {join, leave, joinAsync};
+      App = connect(mapStateToProps, actionCreators)(App);
+    ```
+    - connect 可以使用装饰器的方式来写：
+      - npm run eject 弹出个性化配置；
+      - npm install babel-plugin-transform-decorators-legacy 插件；
+      - package.json 里的 babel 加上 plugins 配置。
+      ```json
+      "plugins": [
+        "transform-decorators-legacy"
+      ]
+      ```
+      ```js
+      @connect(
+        state => ({num: state}),
+        {join, leave, joinAsync}
+      )
+      ```
+
+## react-router4 基础知识
+ - 安装：npm install react-router-dom --save；
+ - 入门组件：
+  - BrowserRouter，包裹整个应用;
+  - Router 路由对应渲染的组件，可嵌套；
+  - Link 跳转专用。
+  ```js
+  ReactDOM.render(<div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <div>
+          <ul>
+            <li>
+              <Link to='/'>一班</Link>
+            </li>
+            <li>
+              <Link to='/erban'>二班</Link>
+            </li>
+            <li>
+              <Link to='/sanban'>三班</Link>
+            </li>
+          </ul>
+          {/* 设置路由渲染对应的页面 */}
+          <Route path='/' exact component={App}></Route>
+          <Route path='/erban' component={Erban}></Route>
+          <Route path='/sanban' component={Sanban}></Route>
+        </div>
+      </BrowserRouter>
+    </Provider>
+  </div>, document.getElementById('root'));
+  ```
