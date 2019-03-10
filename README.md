@@ -183,18 +183,39 @@
     ```
 
   ##### 其它组件
-    - url 参数，Route 组件参数可用冒号标识参数；
-      - `<Route path='/:location' component={Test}></Route>`
+    - url 参数：
+      - Route 组件参数可用冒号标识参数；
+        ```
+          <Route path='/' exact component={App}></Route>
+          <Route path='/erban' component={Erban}></Route>
+          <Route path='/sanban' component={Sanban}></Route>
+          <Route path='/:location' component={Test}></Route>
+        ```
       - Test 组件：
-      ```
-        class Test extends React.Component{
-          render(){
-            console.log(this.props);
-            return (<div>
-              测试组件：{this.props.match.params.location}
-            </div>)
+        ```
+          class Test extends React.Component{
+            render(){
+              console.log(this.props);
+              return (<div>
+                测试组件：{this.props.match.params.location}
+              </div>)
+            }
           }
-        }
-      ```
+        ```
     - Redirect 组件跳转；
-    - Switch：有多个组件时候，只渲染一个子 Route 组件。
+      ```
+        <Redirect to='/test'></Redirect>
+        <Route path='/' exact component={App}></Route>
+        <Route path='/erban' component={Erban}></Route>
+        <Route path='/sanban' component={Sanban}></Route>
+        <Route path='/test' component={Test}></Route>
+      ```
+    - Switch：有多个组件时候，只渲染第一个符合条件的子 Route 组件。
+      ```
+        <Switch>
+          <Route path='/' exact component={App}></Route>
+          <Route path='/erban' component={Erban}></Route>
+          <Route path='/sanban' component={Sanban}></Route>
+          <Route path='/:location' component={Test}></Route>
+        </Switch>
+      ```

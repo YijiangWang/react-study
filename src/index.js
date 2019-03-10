@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import {BrowserRouter, Route, Link, Redirect} from 'react-router-dom';
+import {BrowserRouter, Route, Link, Redirect, Switch} from 'react-router-dom';
 import App from './app';
 import { reducer } from './index.redux';
 
@@ -46,10 +46,12 @@ ReactDOM.render(<div>
           </li>
         </ul>
         {/* 设置路由渲染对应的页面 */}
+        <Redirect to='/test'></Redirect>
         <Route path='/' exact component={App}></Route>
         <Route path='/erban' component={Erban}></Route>
         <Route path='/sanban' component={Sanban}></Route>
-        <Route path='/:location' component={Test}></Route>
+        <Route path='/test' component={Test}></Route>
+        
       </div>
     </BrowserRouter>
   </Provider>
