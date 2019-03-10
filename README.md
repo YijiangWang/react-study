@@ -151,33 +151,50 @@
       ```
 
 ## react-router4 基础知识
- - 安装：npm install react-router-dom --save；
- - 入门组件：
-  - BrowserRouter，包裹整个应用;
-  - Router 路由对应渲染的组件，可嵌套；
-  - Link 跳转专用。
-  ```js
-  ReactDOM.render(<div>
-    <Provider store={store}>
-      <BrowserRouter>
-        <div>
-          <ul>
-            <li>
-              <Link to='/'>一班</Link>
-            </li>
-            <li>
-              <Link to='/erban'>二班</Link>
-            </li>
-            <li>
-              <Link to='/sanban'>三班</Link>
-            </li>
-          </ul>
-          {/* 设置路由渲染对应的页面 */}
-          <Route path='/' exact component={App}></Route>
-          <Route path='/erban' component={Erban}></Route>
-          <Route path='/sanban' component={Sanban}></Route>
-        </div>
-      </BrowserRouter>
-    </Provider>
-  </div>, document.getElementById('root'));
-  ```
+  - 安装：npm install react-router-dom --save；
+  ##### 入门组件：
+    - BrowserRouter，包裹整个应用;
+    - Router 路由对应渲染的组件，可嵌套；
+    - Link 跳转专用。
+    ```js
+      ReactDOM.render(<div>
+        <Provider store={store}>
+          <BrowserRouter>
+            <div>
+              <ul>
+                <li>
+                  <Link to='/'>一班</Link>
+                </li>
+                <li>
+                  <Link to='/erban'>二班</Link>
+                </li>
+                <li>
+                  <Link to='/sanban'>三班</Link>
+                </li>
+              </ul>
+              {/* 设置路由渲染对应的页面，exact：精准匹配 */}
+              <Route path='/' exact component={App}></Route>
+              <Route path='/erban' component={Erban}></Route>
+              <Route path='/sanban' component={Sanban}></Route>
+            </div>
+          </BrowserRouter>
+        </Provider>
+      </div>, document.getElementById('root'));
+    ```
+
+  ##### 其它组件
+    - url 参数，Route 组件参数可用冒号标识参数；
+      - `<Route path='/:location' component={Test}></Route>`
+      - Test 组件：
+      ```
+        class Test extends React.Component{
+          render(){
+            console.log(this.props);
+            return (<div>
+              测试组件：{this.props.match.params.location}
+            </div>)
+          }
+        }
+      ```
+    - Redirect 组件跳转；
+    - Switch：有多个组件时候，只渲染一个子 Route 组件。

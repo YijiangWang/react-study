@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import {BrowserRouter, Route, Link, Redirect} from 'react-router-dom';
 import App from './app';
 import { reducer } from './index.redux';
 
@@ -19,6 +19,14 @@ function Erban() {
 }
 function Sanban() {
   return <h2>三班</h2>;
+}
+class Test extends React.Component{
+  render(){
+    console.log(this.props);
+    return (<div>
+      测试组件：{this.props.match.params.location}
+    </div>)
+  }
 }
 
 // Provider 的使用
@@ -41,6 +49,7 @@ ReactDOM.render(<div>
         <Route path='/' exact component={App}></Route>
         <Route path='/erban' component={Erban}></Route>
         <Route path='/sanban' component={Sanban}></Route>
+        <Route path='/:location' component={Test}></Route>
       </div>
     </BrowserRouter>
   </Provider>

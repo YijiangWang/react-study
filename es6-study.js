@@ -150,15 +150,15 @@
 // }
 // console.log(cbrtFun(-8));
 
-function* gen(){
-  yield 'heiheihei';
-  yield 'haha';
-  return 'end来了';
-  yield '还有吗';
-}
+// function* gen(){
+//   yield 'heiheihei';
+//   yield 'haha';
+//   return 'end来了';
+//   yield '还有吗';
+// }
 
-const [a, b, c, d] = gen()
-console.log(a, b, c, d);  //heiheihei haha undefined undefined
+// const [a, b, c, d] = gen()  //只会取到 return 的前面一句
+// console.log(a, b, c, d);  //heiheihei haha undefined undefined
 // const g = gen();
 // console.log(g);
 // console.log(g.next());
@@ -166,14 +166,14 @@ console.log(a, b, c, d);  //heiheihei haha undefined undefined
 // console.log(g.next());
 // console.log(g.next());
 
-function* testFunc(){
-  let a = 0;
-  let b = 1;
-  while(true){
-    yield a;
-    [a, b] = [b, a + b];
-  } 
-}
+// function* testFunc(){
+//   let a = 0;
+//   let b = 1;
+//   while(true){
+//     yield a;
+//     [a, b] = [b, a + b];
+//   } 
+// }
 
 // const test = testFunc();
 // console.log(test.next());
@@ -183,5 +183,39 @@ function* testFunc(){
 // console.log(test.next());
 // console.log(test.next());
 
-const items = new Set([1,2,3,4,5,6,4,3,2]);
-console.log(items)
+// const items = new Set([1,2,3,4,5,6,4,3,2]);
+// console.log(items)  //Set { 1, 2, 3, 4, 5, 6 }
+
+
+
+
+
+/**
+ * 二、字符串的扩展
+ * 2.1. 码点在\u0000~\uFFFF之间的字符。超出这个范围的字符，必须用两个双字节的形式表示 "\uD842\uDFB7"；ES6 对这一点做出了改进，只要将码点放入大括号，就能正确解读该字符 "\u{20BB7}"。
+ * 2.2. charAt 方法无法读取整个字符(4个字节)；charCodeAt 方法只能分别返回前两个字节和后两个字节的值；ES6 提供了 codePointAt 方法，能够正确处理 4 个字节储存的字符，返回一个字符的码点。
+ * 2.3. 注：fromCodePoint 方法定义在 String 对象上，而 codePointAt 方法定义在字符串的实例对象上。
+ * 2.4. ES6 增加了 for...of 接口遍历字符串，这个遍历器最大的优点是可以识别大于 0xFFFF 的码点；
+ * 2.5. padStart(),padEnd()：如果原字符串的长度大于或等于最大长度，则字符串补全不生效，返回原字符串。
+ */
+
+// 2.6. 字符串模板可以嵌套
+const tmpl = addrs => `
+  <table>
+    ${addrs.map(addr => `
+      <tr><td>${addr.first}</td></tr>
+      <tr><td>${addr.last}</td></tr>
+    `).join('')}
+  </table>
+`;
+const data = [
+  {first: 'wang', last: 'yijiang'},
+  {first: 'Mike', last: 'Jackson'}
+]
+console.log(tmpl(data));
+
+// 2.7. 如果需要引用模板字符串本身，在需要时执行，可以像下面这样写
+// 写法一：
+let str = 'return' + '`Hello ${name}!`';
+let func = new Function('name', str);
+console.log(func('jack'));
