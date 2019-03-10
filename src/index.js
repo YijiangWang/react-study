@@ -46,12 +46,12 @@ ReactDOM.render(<div>
           </li>
         </ul>
         {/* 设置路由渲染对应的页面 */}
-        <Redirect to='/test'></Redirect>
-        <Route path='/' exact component={App}></Route>
-        <Route path='/erban' component={Erban}></Route>
-        <Route path='/sanban' component={Sanban}></Route>
-        <Route path='/test' component={Test}></Route>
-        
+        <Switch>
+          <Route path='/' exact component={App}></Route>
+          <Route path='/erban' component={Erban}></Route>
+          <Route path='/sanban' component={Sanban}></Route>
+          <Route path='/:location' component={Test}></Route>
+        </Switch>
       </div>
     </BrowserRouter>
   </Provider>
