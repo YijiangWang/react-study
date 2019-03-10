@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import {BrowserRouter, Route, Link, Redirect, Switch} from 'react-router-dom';
-import { reducer } from './index.redux';
+import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
+
+import reducers from './reducer';
 import Auth from './auth';
 import Dashboard from './dashboard';
 
-const store = createStore(reducer, compose(
+
+const store = createStore(reducers, compose(
     applyMiddleware(thunk),
     // 判断 devToolsExtension 是否存在，如果存在就获取 devToolsExtension()，否则就是用一个空函数
     window.devToolsExtension ? window.devToolsExtension() : () => { }

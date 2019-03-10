@@ -219,3 +219,12 @@
           <Route path='/:location' component={Test}></Route>
         </Switch>
       ```
+  ##### 和 redux 配合
+    - 复杂的 redux 应用，会有多个 reducer，用 redux 提供的 combineReducer 可以将多个 reducer 合并；
+      ```
+        import { combineReducers } from 'redux';
+        import { reducer } from './index.redux';
+        import { auth } from './auth.redux';
+
+        export default combineReducers({reducer, auth});
+      ```
