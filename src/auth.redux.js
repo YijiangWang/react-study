@@ -13,7 +13,7 @@ export const auth = (state = {isAuth: false, name: 'Yijiang'}, action) => {
   }
 }
 
-//action
+//action creator
 export const login = () => {
   return {type: LOGIN};
 }
