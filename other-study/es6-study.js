@@ -180,18 +180,18 @@
 
 // console.log(typeof(+'-11'));
 // 实现
-const signFun = (x) => {
-  console.log('first =====> ', x);      // first =====>  0
-  x = +x;
-  console.log('second =====> ', x);     // second =====>  0
-  if(x === 0 || isNaN(x)){
-    console.log('third =====> ', x);    // third =====>  0
-    return x;
-  }
-  console.log('forth =====> ', x);
-  return x > 0 ? 1 : -1;
-};
-console.log(signFun(-0))        // -0
+// const signFun = (x) => {
+//   console.log('first =====> ', x);      // first =====>  0
+//   x = +x;
+//   console.log('second =====> ', x);     // second =====>  0
+//   if(x === 0 || isNaN(x)){
+//     console.log('third =====> ', x);    // third =====>  0
+//     return x;
+//   }
+//   console.log('forth =====> ', x);
+//   return x > 0 ? 1 : -1;
+// };
+// console.log(signFun(-0))        // -0
 
 /**
  * 7.3. Math.cbrt()：计算一个数的立方根，对于非数值，方法内部会先使用 Number 方法将其转换为数值（(Math.cbrt(null)：0）
@@ -372,3 +372,96 @@ console.log(signFun(-0))        // -0
 // let str = 'return' + '`Hello ${name}!`';
 // let func = new Function('name', str);
 // console.log(func('jack'));
+
+
+/**
+ * 数组的扩展
+ * 
+ */
+
+// function testArr(a, b, c, d){
+//   console.log(a + b + c + d);
+// }
+// const arr1 = [2, 3];
+// testArr(-1, ...arr1, 2, ...[3, 5]);   // 6
+
+// 复制数组
+// const arr2 = [3, 7];
+// const arr3 = arr2;  //arr3 和 arr2 指向同一个地址；
+// arr3[0] = 9;
+// console.log(arr2);  // [9, 7']
+
+// const arr4 = [13, 17];
+// const arr5 = arr4.concat(); // arr5 是对 arr4 的克隆
+// arr5[0] = 19;
+// console.log(arr4);  // [13, 17]
+
+// const arr6 = [23, 26];
+// const arr7 = [...arr6]; // arr7 是对 arr6 的克隆
+// arr7[0] = 29;
+// console.log(arr6);  //[23, 26]
+
+// const arr8 = [33, 37];
+// const [...arr9] = arr8; // arr9 是对 arr8 的克隆
+// arr9[0] = 39;
+// console.log(arr8);  // [33, 37]
+
+// 合并数组
+// const a1 = [{name: 'yijiang'}];
+// const a2 = [{age: 18}];
+// const a3 = a1.concat(a2);  // 这两种方法都是对原数组成员的引用，都是浅拷贝
+// const a4 = [...a1, ...a2];
+// console.log(a3, a4);  // [ { name: 'yijiang' }, { age: 18 } ] [ { name: 'yijiang' }, { age: 18 } ]
+// a1[0].name = 'maerni';
+// a2[0].age = 16;
+// console.log(a3, a4);  // [ { name: 'maerni' }, { age: 16 } ] [ { name: 'maerni' }, { age: 16 } ]
+
+// 字符串
+// console.log([...'hello']);  // [ 'h', 'e', 'l', 'l', 'o' ]
+
+// 通过 Array.from() 方法将类数组转为真正的数组
+// const arrayLike = {
+//   0: 'aaa',
+//   1: 'bbb',
+//   2: 'ccc',
+//   length: 3
+// }
+// const arrayTrue = Array.from(arrayLike);
+// console.log(arrayTrue); // [ 'aaa', 'bbb', 'ccc' ]
+// 总结：扩展运算符背后调用的是遍历器接口（Symbol.iterator），如果一个对象没有部署这个接口，就无法转换;
+//      Array.from 方法还支持类似数组的对象。所谓类似数组的对象，本质特征只有一点，即必须有length属性。因此，任何有length属性的对象，都可以通过Array.from方法转为数组，而此时扩展运算符就无法转换
+
+// Array.of()：将一组值转换为数组
+// const ao1 = Array.of(2, 3, 5);
+// console.log(ao1);
+
+// copyWithin(target, start, end )：将指定位置的成员复制到其他位置（会覆盖原有成员），然后返回当前数组。
+// target（必需）：从该位置开始替换数据。如果为负值，表示倒数。
+// start（可选）：从该位置开始读取数据，默认为 0。如果为负值，表示倒数。
+// end（可选）：到该位置前停止读取数据，默认等于数组长度。如果为负值，表示倒数。
+// const c1 = [3, 4, 5, 6, 7, 8].copyWithin(1, 0, 3);
+// console.log(c1);  // [ 3, 3, 4, 5, 7, 8 ]
+
+// 数组实例的find方法，用于找出第一个符合条件的数组成员
+// const f1 = [3, 5, 7, 9].find(n => n < 6);
+// console.log(f1);  // 3
+
+// const f2 = [3, 5, 7, 9].findIndex(n => n > 6);
+// console.log(f2);  // 2
+
+// fill(value, start, end)：使用给定值 value，填充一个数组；
+// const f1 = ['a', 'b', 'c', 'd', 'e'].fill(88, 2, 4); 
+// console.log(f1);  // ['a', 'b', 88, 88, 'e']
+
+// includes(value, start)：检查某个值是否在数组中
+// console.log([1,2,3,4,5,6].includes(3, 5));  // false
+
+// flat()：如果数组是多维的，该方法将数组拉平；默认参数是 1，只拉平一层，如果要拉平多层，可传入一个正整数
+// const f1 = [1,2,3,[4,5,[6,7,[8,9],10,11],12,13],14];
+// console.log(f1.flat()); // [1, 2, 3, 4, 5, [6, 7, [8, 9], 10, 11], 12, 13, 14]
+// console.log(f1.flat(3)); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+
+// flatMap()：方法对原数组的每个成员执行一个函数（map 函数），然后对返回值组成的数组执行 flat() 方法
+// console.log([1, 2, 3].flatMap(x => x * x));       // [1, 4, 9];
+// console.log([1, 2, 3].flatMap(x => [x * x]));     // [1, 4, 9];
+// console.log([1, 2, 3].flatMap(x => [[x * x]]));   // [[1], [4], [9]]
