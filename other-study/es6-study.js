@@ -465,3 +465,88 @@
 // console.log([1, 2, 3].flatMap(x => x * x));       // [1, 4, 9];
 // console.log([1, 2, 3].flatMap(x => [x * x]));     // [1, 4, 9];
 // console.log([1, 2, 3].flatMap(x => [[x * x]]));   // [[1], [4], [9]]
+
+// var arr1 = [3, 1, 2];
+// for(let i=0; i<arr1.length; i++){
+//   for (let j = 0; j < arr1.length; j++) {
+//     if(arr1[i] > arr1[j]){
+//       let temp = arr1[i];
+//       arr1[i] = arr1[j];
+//       arr1[j] = temp;
+//     }
+//   }
+//   console.log('inner ====> ', arr1);
+// }
+// console.log('last ====> ', arr1);
+
+
+
+
+// const reg1 =  /^[a-zA-Z0-9\u4e00-\u9fa5\uff00-\uffff\u3000\\[\\],.{}()<>?/|`~\"'@#$%&*《》（）+=_￥¥。，、;:：；【】…？！!”“’‘• \\r\\n\\t\\\\-]*$/
+// const reg2 = /^[a-zA-Z0-9\u2f00-\u2fdf\u4e00-\u9fa5\uff00-\uffff\u3000\u3400-\u4DB5\uf900-\ufaff\ue863\\[\\],.{}()<>?/\\|`"'@#$%&*《》（）+=_¥￥。，、;:：；【】…？！!”“’‘• \\r\\n\\t\\\\-]*$/
+// const temp = `”\u2f00-\u2fdf“，”\u3400-\u4DB5“，”\uf900-\ufaff“, "\ue863"`
+// console.log(reg1.test('王'));
+
+
+// const arr = ['a', 'b'];
+// console.log(arr.values ())
+
+
+/**
+ * Symbol 类型：第七种数据类型
+ */
+// const a = Symbol('aaa');
+// const b = Symbol('bbb');
+// console.log(a.toString());
+
+// 参数是一个对象，就会调用该对象的toString方法，将其转为字符串，然后才生成一个 Symbol 值
+// const obj = {
+//   aaa: 222,
+//   toString(){
+//     return 'obj'
+//   }
+// };
+// console.log(Symbol(obj));
+
+// Symbol 值作为对象属性名时，不能用点运算符;因为点运算符后面总是字符串，所以不会读取mySymbol作为标识名所指代的那个值，导致a的属性名实际上是一个字符串，而不是一个 Symbol 值
+// const obj = {};
+// const sym = Symbol();
+// obj[sym] = 'aaa'
+// console.log(obj.sym);
+// console.log(obj[sym]);
+// const ttt = {}
+// console.log(Object.getOwnPropertySymbols(obj));
+
+
+/**
+ * Set：新的数据结构，它类似于数组，但是成员的值都是唯一的，没有重复的值。
+ * 
+ * 1、去除数组重复成員；
+ * 2、向 Set 加入值的时候，不会发生类型转换，所以5和"5"是两个不同的值；
+ * 3、操作方法：add、delete、has、clear
+ * 4、遍历方法：keys、values、entries、forEach
+ * 
+ * WeakSet：结构与 Set 类似，也是不含有相同的值。但是和 Set 有两点不同：一/WeakSet的成员只能是对象；二/WeakSet中的对象都是弱引用。
+ */
+
+// let setArr = new Set(['a','b','c']);
+
+// for(let item of setArr.entries()){
+//   console.log(item)
+// }
+
+
+/**
+ * Map：一种数据结构，它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。
+ * 属性：size
+ * 操作方法：set(key,value)、get(key)、has(key)、delete(key)、clear()
+ * 遍历方法：keys()、values()、entries()、forEach()
+ */
+
+var arr = ['a','b','c','d'];
+var arrayIt = arr[Symbol.iterator]();
+console.log(arrayIt.next());  //{value: "a", done: false}
+console.log(arrayIt.next());  //{value: "b", done: false}
+console.log(arrayIt.next());  //{value: "c", done: false}
+console.log(arrayIt.next());  //{value: "d", done: false}
+console.log(arrayIt.next());  //{value: undefined, done: true}
